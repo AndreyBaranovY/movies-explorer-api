@@ -9,4 +9,4 @@ Yandex Praktikum Diploma BackEnd
 **npm run dev** — запуск сервера с hot-reload
 ***
 ## Как найти сервер:
-**IP-адрес сервера:** 84.252.131.225 **домен:** <api.movie-finder.students.nomoredomains.rocks>
+**IP-адрес сервера:** 84.252.131.225 **домен:** api.movie-finder.students.nomoredomains.rocks
