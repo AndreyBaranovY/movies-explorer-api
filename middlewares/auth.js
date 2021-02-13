@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken');
 const UnauthorizedError = require('../errors/UnauthorizedError');
+const { UNAUTHORIZED } = require('../constants');
 
 const { NODE_ENV, JWT_SECRET } = process.env;
 
@@ -12,10 +13,8 @@ module.exports = (req, res, next) => {
   try {
     payload = jwt.verify(token, `${NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret'}`);
   } catch (err) {
-    throw new UnauthorizedError({ message: 'Middleware reports: Необходима авторизация' });
+    throw new UnauthorizedError({ message: UNAUTHORIZED });
   }
   req.user = payload;
-  console.log('PayLoad: >>  ');
-  console.log(payload);
   next();
 };

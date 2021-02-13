@@ -10,15 +10,15 @@ const urlValidation = (value) => {
 
 const validateMovie = celebrate({
   body: Joi.object().keys({
-    country: Joi.string().required(),
-    director: Joi.string().required(),
-    duration: Joi.number().required(),
-    year: Joi.string().required(),
-    description: Joi.string().required(),
+    country: Joi.string().required().min(2).max(30),
+    director: Joi.string().required().min(2).max(30),
+    duration: Joi.number().required().min(1).max(5),
+    year: Joi.string().required().min(2).max(4),
+    description: Joi.string().required().min(2).max(1000),
     image: Joi.string().custom(urlValidation).required(),
     trailer: Joi.string().custom(urlValidation).required(),
-    nameRU: Joi.string().required(),
-    nameEN: Joi.string().required(),
+    nameRU: Joi.string().required().min(2).max(30),
+    nameEN: Joi.string().required().min(2).max(30),
     movieId: Joi.string().alphanum().length(24).hex(),
     thumbnail: Joi.string().custom(urlValidation).required(),
   }),

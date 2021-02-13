@@ -6,12 +6,15 @@ const NotFoundError = require('../errors/NotFoundError');
 const ConflictError = require('../errors/ConflictError');
 
 const { NODE_ENV, JWT_SECRET } = process.env;
+const {
+  CONFLICT, NOT_FOUND, BAD_REQUEST, SUCCESS,
+} = require('../constants');
 
 module.exports.getMe = (req, res, next) => {
   User.findById(req.user._id)
     .orFail()
     .catch(() => {
-      throw new NotFoundError({ message: 'Нет пользователя с таким id' });
+      throw new NotFoundError({ message: NOT_FOUND });
     })
     .then((user) => res.send({ data: user }))
     .catch(next);
@@ -28,7 +31,7 @@ module.exports.createUser = (req, res, next) => {
     }))
     .catch((err) => {
       if (err.name === 'MongoError' || err.code === 11000) {
-        throw new ConflictError({ message: 'Пользователь с таким email уже зарегистрирован' });
+        throw new ConflictError({ message: CONFLICT });
       } else next(err);
     })
     .then((user) => res.status(201).send({
@@ -47,12 +50,12 @@ module.exports.updateUser = (req, res, next) => {
       new: true,
       runValidators: true,
     })
-    .orFail(() => new NotFoundError({ message: 'Нет пользователя с таким id' }))
+    .orFail(() => new NotFoundError({ message: NOT_FOUND }))
     .catch((err) => {
       if (err instanceof NotFoundError) {
         throw err;
       }
-      throw new BadRequestError({ message: `Указаны некорректные данные при обновлении пользователя: ${err.message}` });
+      throw new BadRequestError({ message: BAD_REQUEST });
     })
     .then((user) => res.send({ data: user }))
     .catch(next);
@@ -73,8 +76,7 @@ module.exports.login = (req, res, next) => {
           httpOnly: true,
           sameSite: true,
         })
-
-        .send({ token: jwt.sign({ _id: user._id }, 'dev-secret', { expiresIn: '7d' }), message: 'Успешная авторизация' });
+        .send({ token: jwt.sign({ _id: user._id }, 'dev-secret', { expiresIn: '7d' }), message: SUCCESS });
     })
     .catch(next);
 };

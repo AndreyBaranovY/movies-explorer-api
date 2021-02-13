@@ -3,6 +3,7 @@ const BadRequestError = require('../errors/BadRequestError');
 const InternalServerError = require('../errors/InternalServerError');
 const NotFoundError = require('../errors/NotFoundError');
 const ForbiddenError = require('../errors/ForbiddenError');
+
 const {
   BAD_REQUEST, FORBIDDEN, INTERNAL_SERVER_ERROR, MOVIE_NOT_FOUND,
 } = require('../constants');
