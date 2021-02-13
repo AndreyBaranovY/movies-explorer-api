@@ -12,7 +12,7 @@ const validateMovie = celebrate({
   body: Joi.object().keys({
     country: Joi.string().required().min(2).max(30),
     director: Joi.string().required().min(2).max(30),
-    duration: Joi.number().required().min(1).max(5),
+    duration: Joi.number().required().min(1).max(1000000),
     year: Joi.string().required().min(2).max(4),
     description: Joi.string().required().min(2).max(1000),
     image: Joi.string().custom(urlValidation).required(),
