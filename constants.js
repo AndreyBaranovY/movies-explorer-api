@@ -6,6 +6,7 @@ const NOT_FOUND = 'Ресурс не найден';
 const MOVIE_NOT_FOUND = 'Фильм не найден';
 const UNAUTHORIZED = 'Необходима авторизация';
 const SUCCESS = 'Успешная авторизация';
+const SUCCESS_LOGOUT = 'Вы вышли из приложения';
 const LIMITER_MESSAGE = 'Слишком много запросов с вашего IP, попробуйте повторить попытку позже';
 
 module.exports = {
@@ -17,5 +18,6 @@ module.exports = {
   MOVIE_NOT_FOUND,
   UNAUTHORIZED,
   SUCCESS,
+  SUCCESS_LOGOUT,
   LIMITER_MESSAGE,
 };

@@ -8,6 +8,6 @@ const {
 } = require('../controllers/users');
 
 usersRouter.get('/users/me', validateId, getMe);
-usersRouter.put('/users/me', validateUserUpdate, updateUser);
+usersRouter.patch('/users/me', validateUserUpdate, updateUser);
 
 module.exports = usersRouter;

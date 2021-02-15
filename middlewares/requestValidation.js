@@ -12,27 +12,27 @@ const validateMovie = celebrate({
   body: Joi.object().keys({
     country: Joi.string().required().min(2).max(30),
     director: Joi.string().required().min(2).max(30),
-    duration: Joi.number().required().min(1).max(1000000),
+    duration: Joi.number().required().min(1).max(1000),
     year: Joi.string().required().min(2).max(4),
-    description: Joi.string().required().min(2).max(1000),
+    description: Joi.string().required().min(2).max(3000),
     image: Joi.string().custom(urlValidation).required(),
     trailer: Joi.string().custom(urlValidation).required(),
     nameRU: Joi.string().required().min(2).max(30),
     nameEN: Joi.string().required().min(2).max(30),
-    movieId: Joi.string().alphanum().length(24).hex(),
+    movieId: Joi.string().hex(),
     thumbnail: Joi.string().custom(urlValidation).required(),
   }),
 });
 
 const validateId = celebrate({
   params: Joi.object().keys({
-    _id: Joi.string().alphanum().length(24).hex(),
+    _id: Joi.string().length(24).hex(),
   }),
 });
 
 const validateMovieId = celebrate({
   params: Joi.object().keys({
-    movieId: Joi.string().alphanum().length(24).hex(),
+    movieId: Joi.string().hex(),
   }),
 });
 

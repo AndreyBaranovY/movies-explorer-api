@@ -7,7 +7,7 @@ const ConflictError = require('../errors/ConflictError');
 
 const { NODE_ENV, JWT_SECRET } = process.env;
 const {
-  CONFLICT, NOT_FOUND, BAD_REQUEST, SUCCESS,
+  CONFLICT, NOT_FOUND, BAD_REQUEST, SUCCESS, SUCCESS_LOGOUT,
 } = require('../constants');
 
 module.exports.getMe = (req, res, next) => {
@@ -79,4 +79,17 @@ module.exports.login = (req, res, next) => {
         .send({ token: jwt.sign({ _id: user._id }, 'dev-secret', { expiresIn: '7d' }), message: SUCCESS });
     })
     .catch(next);
+};
+
+module.exports.logout = (req, res, next) => {
+  let token = req.cookies.jwt;
+  try {
+    token = null;
+    res
+      .cookie('jwt', token)
+      .send({ token, message: SUCCESS_LOGOUT });
+  } catch (err) {
+    throw new BadRequestError({ message: BAD_REQUEST });
+  }
+  next();
 };
