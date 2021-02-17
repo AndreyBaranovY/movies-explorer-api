@@ -59,7 +59,7 @@ const movieSchema = new mongoose.Schema({
     // select: false, // не возвращаем из базы
   },
   movieId: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: Number,
     required: true,
     ref: 'user',
     // select: false, // не возвращаем из базы
